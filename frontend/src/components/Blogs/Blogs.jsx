@@ -4,7 +4,7 @@ import BlogItem from './BlogItem'
 
 export const Blogs = () => {
 	return (
-		<section className="blogs">
+		<section className="blogs blog-page">
 			<div className="container">
 				<div className="section-title">
 					<h2>From Our Blog</h2>

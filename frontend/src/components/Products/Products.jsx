@@ -1,8 +1,62 @@
 import './Products.css'
 
 import ProductItem from './ProductItem'
+import PropTypes from 'prop-types'
+import Slider from 'react-slick'
+import productsData from '../../data.json'
+import { useState } from 'react'
+
+function NextBtn({ onClick }) {
+	return (
+		<button className="glide__arrow glide__arrow--right" onClick={onClick}>
+			<i className="bi bi-chevron-right"></i>
+		</button>
+	)
+}
+
+NextBtn.propTypes = {
+	onClick: PropTypes.func
+}
+
+function PrevBtn({ onClick }) {
+	return (
+		<button className="glide__arrow glide__arrow--left" onClick={onClick}>
+			<i className="bi bi-chevron-left"></i>
+		</button>
+	)
+}
+
+PrevBtn.propTypes = {
+	onClick: PropTypes.func
+}
 
 const Products = () => {
+	const [products] = useState(productsData)
+
+	const sliderSettings = {
+		dots: false,
+		infinite: true,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		nextArrow: <NextBtn />,
+		prevArrow: <PrevBtn />,
+		autoplaySpeed: 3000,
+		autoplay: true,
+		responsive: [
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2
+				}
+			},
+			{
+				breakpoint: 520,
+				settings: {
+					slidesToShow: 1
+				}
+			}
+		]
+	}
 	return (
 		<section className="products">
 			<div className="container">
@@ -11,22 +65,11 @@ const Products = () => {
 					<p>Summer Collection New Morden Design</p>
 				</div>
 				<div className="product-wrapper product-carousel">
-					<div className="glide__track">
-						<ul className="product-list glide__slides" id="product-list">
-							<ProductItem />
-							<ProductItem />
-							<ProductItem />
-							<ProductItem />
-						</ul>
-					</div>
-					<div className="glide__arrows">
-						<button className="glide__arrow glide__arrow--left">
-							<i className="bi bi-chevron-left"></i>
-						</button>
-						<button className="glide__arrow glide__arrow--right">
-							<i className="bi bi-chevron-right"></i>
-						</button>
-					</div>
+					<Slider {...sliderSettings}>
+						{products.map((product) => (
+							<ProductItem productItem={product} key={product.id} />
+						))}
+					</Slider>
 				</div>
 			</div>
 		</section>

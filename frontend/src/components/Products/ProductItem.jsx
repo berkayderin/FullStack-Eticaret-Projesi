@@ -1,17 +1,24 @@
 import './ProductItem.css'
 
-const ProductItem = () => {
+import { CartContext } from '../../context/CartProvider'
+import propTypes from 'prop-types'
+import { useContext } from 'react'
+
+const ProductItem = ({ productItem }) => {
+	const { addToCard, cartItems } = useContext(CartContext)
+
+	const filteredCart = cartItems.find((cartItem) => cartItem.id === productItem.id)
 	return (
-		<li className="product-item glide__slide glide__slide--active">
+		<div className="product-item glide__slide glide__slide--active">
 			<div className="product-image">
 				<a href="#">
-					<img src="img/products/product1/1.png" alt="" className="img1" />
-					<img src="img/products/product1/2.png" alt="" className="img2" />
+					<img src={productItem.img.singleImage} alt="" className="img1" />
+					<img src={productItem.img.thumbs[1]} alt="" className="img2" />
 				</a>
 			</div>
 			<div className="product-info">
 				<a href="$" className="product-title">
-					Analogue Resin Strap
+					={productItem.name}
 				</a>
 				<ul className="product-star">
 					<li>
@@ -31,12 +38,12 @@ const ProductItem = () => {
 					</li>
 				</ul>
 				<div className="product-prices">
-					<strong className="new-price">$108.00</strong>
-					<span className="old-price">$165.00</span>
+					<strong className="new-price">${productItem.price.newPrice.toFixed(2)}</strong>
+					<span className="old-price">${productItem.price.oldPrice.toFixed(2)}</span>
 				</div>
-				<span className="product-discount">-22%</span>
+				<span className="product-discount">-{productItem.discount}%</span>
 				<div className="product-links">
-					<button className="add-to-cart">
+					<button className="add-to-cart" onClick={() => addToCard(productItem)} disabled={filteredCart}>
 						<i className="bi bi-basket-fill"></i>
 					</button>
 					<button>
@@ -50,8 +57,13 @@ const ProductItem = () => {
 					</a>
 				</div>
 			</div>
-		</li>
+		</div>
 	)
 }
 
 export default ProductItem
+
+ProductItem.propTypes = {
+	productItem: propTypes.object,
+	setCartItems: propTypes.func
+}
