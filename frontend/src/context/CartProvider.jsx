@@ -15,16 +15,6 @@ const CartProvider = ({ children }) => {
 
 	console.log('cart items:', cartItems)
 
-	// const addToCard = (cardItem) => {
-	// 	setCartItems((prevCart) => [
-	// 		...prevCart,
-	// 		cardItem,
-	// 		{
-	// 			quantity: cardItem.quantity ? cardItem.quantity : 1
-	// 		}
-	// 	])
-	// }
-
 	const addToCard = (cartItem) => {
 		setCartItems((prevCart) => [
 			...prevCart,
