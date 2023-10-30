@@ -5,25 +5,37 @@ import PropTypes from 'prop-types'
 const CartContext = createContext()
 
 const CartProvider = ({ children }) => {
-	const [cartItems, setCartItems] = useState([
+	const [cartItems, setCartItems] = useState(
 		localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-	])
+	)
 
 	useEffect(() => {
 		localStorage.setItem('cartItems', JSON.stringify(cartItems))
 	}, [cartItems])
 
-	const addToCard = (cardItem) => {
+	console.log('cart items:', cartItems)
+
+	// const addToCard = (cardItem) => {
+	// 	setCartItems((prevCart) => [
+	// 		...prevCart,
+	// 		cardItem,
+	// 		{
+	// 			quantity: cardItem.quantity ? cardItem.quantity : 1
+	// 		}
+	// 	])
+	// }
+
+	const addToCard = (cartItem) => {
 		setCartItems((prevCart) => [
 			...prevCart,
-			cardItem,
 			{
-				quantity: cardItem.quantity ? cardItem.quantity : 1
+				...cartItem,
+				quantity: cartItem.quantity ? cartItem.quantity : 1
 			}
 		])
 	}
 
-	const removeFromCart = (itemId) => {
+	const removeFromCard = (itemId) => {
 		const filteredCartItems = cartItems.filter((cartItem) => {
 			return cartItem.id !== itemId
 		})
@@ -31,7 +43,7 @@ const CartProvider = ({ children }) => {
 		setCartItems(filteredCartItems)
 	}
 
-	return <CartContext.Provider value={{ addToCard, removeFromCart, cartItems }}>{children}</CartContext.Provider>
+	return <CartContext.Provider value={{ addToCard, removeFromCard, cartItems }}>{children}</CartContext.Provider>
 }
 
 export default CartProvider

@@ -12,6 +12,7 @@ const ProductItem = ({ productItem }) => {
 	const navigate = useNavigate()
 
 	const filteredCart = cartItems.find((cartItem) => cartItem.id === productItem.id)
+
 	return (
 		<div className="product-item glide__slide glide__slide--active">
 			<div className="product-image">
