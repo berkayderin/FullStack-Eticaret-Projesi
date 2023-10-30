@@ -1,5 +1,7 @@
 import './ProductItem.css'
 
+import { Link, useNavigate } from 'react-router-dom'
+
 import { CartContext } from '../../context/CartProvider'
 import propTypes from 'prop-types'
 import { useContext } from 'react'
@@ -7,13 +9,15 @@ import { useContext } from 'react'
 const ProductItem = ({ productItem }) => {
 	const { addToCard, cartItems } = useContext(CartContext)
 
+	const navigate = useNavigate()
+
 	const filteredCart = cartItems.find((cartItem) => cartItem.id === productItem.id)
 	return (
 		<div className="product-item glide__slide glide__slide--active">
 			<div className="product-image">
 				<a href="#">
-					<img src={productItem.img.singleImage} alt="" className="img1" />
-					<img src={productItem.img.thumbs[1]} alt="" className="img2" />
+					<img src={productItem.img.singleImage} className="img1" />
+					<img src={productItem.img.thumbs[1]} className="img2" />
 				</a>
 			</div>
 			<div className="product-info">
@@ -49,9 +53,9 @@ const ProductItem = ({ productItem }) => {
 					<button>
 						<i className="bi bi-heart-fill"></i>
 					</button>
-					<a href="#" className="product-link">
+					<Link to={`product/${productItem.id}`} className="product-link">
 						<i className="bi bi-eye-fill"></i>
-					</a>
+					</Link>
 					<a href="#">
 						<i className="bi bi-share-fill"></i>
 					</a>

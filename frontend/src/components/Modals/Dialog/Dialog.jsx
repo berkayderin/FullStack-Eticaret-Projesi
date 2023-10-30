@@ -15,7 +15,7 @@ const Dialog = ({ isDialogShow, setIsDialogShow }) => {
 					<i className="bi bi-x"></i>
 				</button>
 				<div className="modal-image">
-					<img src="img/modal-dialog.jpg" alt="" />
+					<img src="/img/modal-dialog.jpg" />
 				</div>
 				<div className="popup-wrapper">
 					<div className="popup-content">
