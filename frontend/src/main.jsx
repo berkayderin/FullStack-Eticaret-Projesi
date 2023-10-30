@@ -5,15 +5,15 @@ import 'slick-carousel/slick/slick-theme.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import CartProvider from './context/CartProvider'
-import MainLayout from './layouts/MainLayout'
+import { Layout } from './layouts/Layout'
 import ReactDOM from 'react-dom/client'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<BrowserRouter>
 		<CartProvider>
-			<MainLayout>
+			<Layout>
 				<App />
-			</MainLayout>
+			</Layout>
 		</CartProvider>
 	</BrowserRouter>
 )
